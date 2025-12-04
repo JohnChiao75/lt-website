@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LightType - 新一代轻量 Markdown 编辑器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e6e6e6;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+        
+        /* 顶栏样式 */
+        header {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(94, 234, 212, 0.1);
+        }
+        
+        .logo {
+            font-family: 'Segoe UI Light', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #5eead4;
+            letter-spacing: 0.5px;
+        }
+        
+        .top-button {
+            background: rgba(94, 234, 212, 0.1);
+            color: #5eead4;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(94, 234, 212, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .top-button:hover {
+            background: rgba(94, 234, 212, 0.2);
+            box-shadow: 0 0 15px rgba(94, 234, 212, 0.3);
+        }
+        
+        /* 主要区域 */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(94, 234, 212, 0.5);
+            letter-spacing: -0.5px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #5eead4 0%, #0ea5e9 100%);
+            color: #0f172a;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(14, 165, 233, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.5);
+            color: #e2e8f0;
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: #5eead4;
+            box-shadow: 0 0 15px rgba(94, 234, 212, 0.3);
+        }
+        
+        /* 特性区域 */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(2, 8, 20, 0.4);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(94, 234, 212, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(2, 8, 20, 0.6);
+            border-color: rgba(94, 234, 212, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #5eead4;
+            text-shadow: 0 0 15px rgba(94, 234, 212, 0.5);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        /* 脚注 */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #64748b;
+            font-size: 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            margin-top: 4rem;
+            border-top: 1px solid rgba(94, 234, 212, 0.1);
+        }
+        
+        footer a {
+            color: #5eead4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 10px rgba(94, 234, 212, 0.5);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 250px;
+                text-align: center;
+            }
+            
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶栏 -->
+    <header>
+        <div class="logo">LightType</div>
+        <a href="editor.html" class="top-button">在线编辑</a>
+    </header>
+    
+    <!-- 主要区域 -->
+    <section class="hero">
+        <h1>LightType</h1>
+        <p class="subtitle">新一代轻量 Markdown 编辑器</p>
+        <div class="buttons">
+            <a href="editor.html" class="btn-primary">在线编辑</a>
+            <a href="http://github.com/johnchiao75/lighttype" class="btn-secondary">下载</a>
+        </div>
+    </section>
+    
+    <!-- 特性介绍 -->
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>基于 Tauri 开发</h3>
+                <p>采用 Tauri 框架构建，安装包体积极小，启动速度快，占用系统资源少，让您的写作体验更加流畅。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>响应式布局</h3>
+                <p>完美适配各种屏幕尺寸，无论是桌面端、平板还是手机，都能获得最佳的编辑体验。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>无在线库依赖</h3>
+                <p>完全离线运行，无需连接互联网，保护您的隐私安全，让您随时随地专注写作。</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 脚注 -->
+    <footer>
+        <p>Made with ❤️ by <a href="http://github.com/johnchiao75">JohnChiao75</a> and Contributors</p>
+    </footer>
+</body>
+</html>
